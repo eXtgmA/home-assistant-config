@@ -1,0 +1,40 @@
+- platform: yr
+  name: Weather
+  monitored_conditions:
+    - temperature
+    - symbol
+    - precipitation
+    - windSpeed
+    - humidity
+
+- platform: template
+  sensors:
+    current_time:
+      friendly_name: 'Time'
+      value_template: '{{now().strftime("%H:%M")}}'
+
+- platform: systemmonitor
+  resources:
+    - type: disk_use_percent
+      arg: /home
+    - type: memory_free
+    - type: processor_use
+
+- platform: fritzbox_netmonitor
+  host: 192.168.178.1
+  
+- platform: mqtt
+  name: "TVEnergy"
+  state_topic: "tele/sonoff_tv/SENSOR"
+  value_template: "{{ value_json.ENERGY.Today }}"
+  unit_of_measurement: "kWh"
+- platform: mqtt
+  name: "TVPower"
+  state_topic: "tele/sonoff_tv/SENSOR"
+  value_template: "{{ value_json.ENERGY.Power }}"
+  unit_of_measurement: "W"
+- platform: mqtt
+  name: "TVVoltage"
+  state_topic: "tele/sonoff_tv/SENSOR"
+  value_template: "{{ value_json.ENERGY.Voltage }}"
+  unit_of_measurement: "V"

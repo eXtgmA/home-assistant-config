@@ -1,0 +1,20 @@
+- platform: mqtt
+  name: floor lamp
+  command_topic: "cmnd/sonoff_lightmiddle/power"
+  state_topic: "stat/sonoff_lightmiddle/POWER"
+  payload_on: "ON"
+  payload_off: "OFF"
+
+- platform: mqtt
+  name: TV
+  command_topic: "cmnd/sonoff_tv/power"
+  state_topic: "stat/sonoff_tv/POWER"
+  payload_on: "ON"
+  payload_off: "OFF"
+
+- platform: mqtt
+  name: Music
+  command_topic: "cmnd/sonoff_music/power"
+  state_topic: "stat/sonoff_music/POWER"
+  payload_on: "ON"
+  payload_off: "OFF"

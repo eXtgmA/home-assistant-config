@@ -1,0 +1,117 @@
+default_view:
+  view: yes
+  icon: mdi:home
+  entities:
+    - group.light_group
+    - group.tv_and_entertainment_group
+    - group.general_group
+    - media_player.spotify
+    - switch.music
+    - group.weather_info_group
+    - scene.movies
+
+room_view:
+  view: yes
+  name: Rooms
+  entities:
+    - group.living_room 
+
+system_view:
+#  name: System
+  view: yes
+  icon: mdi:information-variant
+  entities:
+    - group.rpi_info_group
+    - group.network_info_group
+    - group.info_tv_power_group
+
+weather_info_group:
+  name: Weather Info
+  entities:
+    - sun.sun
+    - sensor.weather_symbol
+    - sensor.weather_wind_speed
+    - sensor.weather_temperature
+    - sensor.weather_precipitation
+    - sensor.weather_humidity
+
+network_info_group:
+  name: network info
+  entities:
+  - sensor.fritz_netmonitor
+
+rpi_info_group:
+  name: Raspberry Info
+  entities:
+    - sensor.cpu_speed
+    - sensor.cpu_used
+    - sensor.disk_used_home
+    - sensor.ram_available
+
+light_group:
+  name: Lights
+  control: hidden
+  entities:
+    - switch.floor_lamp
+    - light.right_notification_light
+    - light.left_notification_light
+    # - light.testlight
+
+tv_and_entertainment_group:
+  name: TV
+  entities:
+    - group.tv_group
+    # - media_player.kodi
+    - light.TVBacklight
+
+general_group:
+  name: general
+  entities:
+    - vacuum.xiaomi_vacuum_cleaner
+    - climate.wohnzimmer_thermostat_1
+    - binary_sensor.wohnzimmer_fensterkontakt_1
+
+calendar_group:
+  name: Calendar
+  entities:
+    - calendar.ausbildung
+    - calendar.contacts
+    - calendar.feiertage_in_deutschland
+    - calendar.ferien
+    - calendar.marvinkuenklergooglemailcom
+
+notification_light_group:
+  name: notification lights
+  view: no
+  entities:
+    - light.right_notification_light
+    - light.left_notification_light
+
+room_group:
+  name: rooms
+  entities:
+    - group.living_room
+
+living_room:
+  name: living room
+  view: no
+  entities:
+    - light.right_notification_light
+    - light.left_notification_light 
+    - switch.floor_lamp
+
+info_tv_power_group:
+  name: TV Energy Info
+  entities:
+    - sensor.TVEnergy
+    - sensor.TVPower
+    - sensor.TVVoltage
+
+tv_group:
+  name: TV Group
+  icon: mdi:television
+  entities:
+    - switch.tv
+    - sensor.TVEnergy
+    - sensor.TVPower
+    - sensor.TVVoltage

@@ -1,0 +1,154 @@
+homeassistant:
+  # Name of the location where Home Assistant is running
+  name: Home
+  # Location required to calculate the time the sun rises and sets
+  latitude: !secret latitude
+  longitude: !secret longitude
+  # Impacts weather/sunrise data (altitude above sea level in meters)
+  elevation: !secret elevation
+  # metric for Metric, imperial for Imperial
+  unit_system: metric
+  # Pick yours from here: http://en.wikipedia.org/wiki/List_of_tz_database_time_zones
+  time_zone: Europe/Berlin
+  # Customization file
+  customize: !include customize.yaml
+
+
+# Other Files
+scene: !include scenes.yaml
+sensor: !include sensors.yaml
+group: !include groups.yaml
+automation: !include automations.yaml
+script: !include scripts.yaml
+switch: !include switches.yaml
+
+# Show links to resources in log and frontend
+#introduction:
+
+# Enables the frontend
+frontend:
+
+# Enables configuration UI
+config:
+
+http:
+  api_password: !secret http_password
+  ssl_certificate: /ssl/certificate.pem
+  ssl_key: /ssl/privkey.pem
+
+# Checks for available updates
+# Note: This component will send some information about your system to
+# the developers to assist with development of Home Assistant.
+# For more information, please see:
+# https://home-assistant.io/blog/2016/10/25/explaining-the-updater/
+updater:
+  # Optional, allows Home Assistant developers to focus on popular components.
+  # include_used_components: true
+
+# Discover some devices automatically
+# discovery:
+
+# Enables support for tracking state changes over time
+history:
+
+# View all events in a logbook
+logbook:
+
+# Enables a map showing the location of tracked devices
+map:
+
+# Track the sun
+sun:
+
+#mqtt
+mqtt:
+  broker: 127.0.0.1
+#  username: !secret mqtt_username
+#  password: !secret mqtt_password
+
+# Text to speech
+tts:
+  - platform: google
+
+# Zone
+zone:
+  - name: Home
+    latitude: !secret zone_home_latitude
+    longitude: !secret zone_home_longitude
+    radius: 10
+    icon: mdi:home
+  - name: Work
+    latitude: !secret zone_work_latitude
+    longitude: !secret zone_work_longitude
+    radius: 50
+    icon: mdi:worker
+  - name: School
+    latitude: !secret zone_school_latitude
+    longitude: !secret zone_school_longitude
+    radius: 100
+    icon: mdi:school
+
+# Light
+light:
+  - platform: yeelight
+    devices:
+      192.168.178.58:
+        name: right_notification_light
+        save_on_change: true
+#      192.168.178.45:
+#        name: other_light
+      192.168.178.57:
+        name: left notification light
+        save_on_change: true
+#  - platform: hyperion
+#    name: TVBacklight
+#    host: 192.168.178.36
+#    default_color: [102, 255, 255]
+  - platform: hyperion
+    name: TestLight
+    host: 192.168.178.220
+    default_color: [0, 255, 0]
+
+
+# Mediaplayer
+media_player:
+  - platform: cast
+    host: 192.168.178.29
+  - platform: spotify
+    client_id: !secret spotify_client_id
+    client_secret: !secret spotify_client_secret
+  - platform: kodi
+    host: 192.168.178.36
+
+logger:
+
+#Thermostat
+maxcube:
+   host: 192.168.178.38
+
+# Google Assistant
+google_assistant:
+  project_id: homeassistant-4d1f3
+  client_id: !secret google_assistant_client_id
+  access_token: !secret google_assistant_access_token
+  agent_user_id: !secret google_agent_user_id
+  api_key: [an API Key generated for the Google Actions project]
+  exposed_domains:
+    - switch
+    - light
+    - group
+    - scene
+    - script
+
+google:
+  client_id: !secret google_client_id
+  client_secret: !secret google_client_secret
+
+vacuum:
+  - platform: xiaomi_miio
+    host: !secret vacuum_robot_ip
+    token: !secret vacuum_robot_token
+
+device_tracker:
+  - platform: fritz
+    host: 192.168.178.1

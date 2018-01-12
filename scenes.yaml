@@ -1,0 +1,14 @@
+- name: Movies
+  entities:
+    light.right_notification_light:
+      state: on
+      brightness: 12
+      rgb_color: [217, 164, 255]
+    light.left_notification_light:
+      state: on
+      brightness: 12
+      rgb_color: [217, 164, 255]
+    switch.tv:
+      state: on
+#    light.tv_backlight:
+#      state: on
