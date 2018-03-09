@@ -1,41 +1,126 @@
-- platform: mqtt
-  name: floor lamp
-  command_topic: "cmnd/sonoff_lightmiddle/power"
-  state_topic: "stat/sonoff_lightmiddle/POWER"
-  payload_on: "ON"
-  payload_off: "OFF"
+# switch, light, cover, media_player, group, fan, scene, script, climate
 
-- platform: mqtt
+switch.floor_lamp:
+  name: Lichtsäule
+  expose: true
+  type: light
+  aliases:
+    - links vom Sofa
+    - Lampe links vom Sofa
+    - links vom Sofa
+    - Stehlampe
+    - Stehleuchte
+    - Standlampe
+    - Standleuchte
+    - große Lampe
+    - große Leuchte
+    - floor lamp
+    - lamp next to couch
+    - light next to couch
+    - next to couch
+
+light.right_notification_light:
+  name: Rechte Lampe
+  expose: true
+  type: light
+  aliases:
+    - in der rechten Ecke
+    - rechte Benachrichtigungslampe
+    # - rechts vom Fernseher
+    # - Lampe rechts vom Fernseher
+    - rechte Lampe
+    - rechte Ecklampe
+    - rechte Ecklampe
+    - rechte Eckleuchte
+    - rechte Stehlampe
+    - rechte Stehleuchte
+    - rechte Standlampe
+    - rechte Standleuchte
+    # - rechts vom TV
+    # - rechts neben dem TV
+    # - rechts neben dem Fernseher
+    - right notification lamp
+    - right notification light
+    # - right to TV
+    # - light right of TV
+    # - right to TV
+    # - light right of TV
+
+light.left_notification_light:
+  name: linke Lampe
+  expose: true
+  type: light
+  aliases:
+    - in der linken Ecke
+    - linke Benachrichtigungslampe
+    # - links vom Fernseher
+    # - links vom Fernseher
+    - linke Ecklampe
+    - linke Eckleuchte
+    - linke Stehlampe
+    - linke Stehleuchte
+    - linke Standlampe
+    - linke Standleuchte
+    # - links vom TV
+    # - links neben dem TV
+    # - links neben dem Fernseher
+    - left notification lamp
+    - left notification light
+    # - left to TV
+    # - left of TV
+    # - light left to TV
+    # - light left of TV
+
+switch.tv:
   name: TV
-  command_topic: "cmnd/sonoff_tv/power"
-  state_topic: "stat/sonoff_tv/POWER"
-  payload_on: "ON"
-  payload_off: "OFF"
+  expose: true
+  type: switch 
+  aliases:
+    - Fernseher
+    - Glotze
+    - Fernsehapparat
+    - Fernsehgerät
+    - Flimmerkiste 
+    - Flimmerkasten
+    - Röhre 
+    - TV-Gerät
+    - TV
 
-- platform: mqtt
-  name: roboStation
-  command_topic: "cmnd/sonoff_robotStation/power"
-  state_topic: "stat/sonoff_robotStation/POWER"
-  payload_on: "ON"
-  payload_off: "OFF"
+switch.music:
+  name: Musikanlage
+  expose: true
+  type: switch
+  aliases:
+    - Musikanlage
+    - Radio
+    - Chromecast
 
-- platform: mqtt
-  name: music
-  command_topic: "cmnd/sonoff_music/power"
-  state_topic: "stat/sonoff_music/POWER"
-  payload_on: "ON"
-  payload_off: "OFF"
+climate.wohnzimmer_thermostat_1:
+  name: Heizung
+  expose: true
+  type: climate
+  aliases:
+    - Heizung
 
-- platform: mqtt
-  name: washer
-  command_topic: "cmnd/sonoff_washer/power"
-  state_topic: "stat/sonoff_washer/POWER"
-  payload_on: "ON"
-  payload_off: "OFF"
+switch.roboStation:
+  name: Roboterladestation
+  expose: true
+  type: switch 
+  aliases:
+    - Roboterladestation
+    - Staubsaugerbasis
+    - Staubsaugerstation
+    - Staubsaugerbasisstation
 
-- platform: mqtt
-  name: Steckdose_1
-  command_topic: "socket/switch1/set"
-  state_topic: "socket/switch1/status"
-  payload_on: "1"
-  payload_off: "0"
+vacuum.xiaomi_vacuum_cleaner:
+  name: Roboter
+  expose: true
+  type: switch
+  aliases:
+    - Roboter
+    - Staubsauger
+    - Staubsaugroboter
+    - Knecht
+    - R2D2
+    - R2
+    - BB8
