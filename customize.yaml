@@ -1,205 +1,127 @@
-#group.all_lights: {}
-
+# -----------------------------------
+# Lights
+# -----------------------------------
 light.right_notification_light:
   friendly_name: Rechte Lampe
-  homebridge_name: Right Lamp
-  google_assistant: true
-  google_assistant_name: rechte Benachrichtigungslampe
-  aliases:
-    - rechte Benachrichtigungslampe
-    - rechts vom Fernseher
-    - Lampe rechts vom Fernseher
-    - rechte Lampe
-    - rechte Ecklampe
-    - rechte Ecklampe
-    - rechte Eckleuchte
-    - rechte Stehlampe
-    - rechte Stehleuchte
-    - rechte Standlampe
-    - rechte Standleuchte
-    - Lampe rechts vom TV
-    - Lampe rechts neben dem TV
-    - Lampe rechts neben dem Fernseher
-    - right notification lamp
-    - right notification light
-    - lamp right to TV
-    - light right of TV
-    - lamp right to TV
-    - light right of TV
 
-light.left_notification_light:
-  friendly_name: Linke Lampe
-  homebridge_name: Left Lamp
-  google_assistant: true
-  google_assistant_name: linke Benachrichtigungslampe
-  aliases:
-    - linke Benachrichtigungslampe
-    - links vom Fernseher
-    - Lampe links vom Fernseher
-    - linke Ecklampe
-    - linke Eckleuchte
-    - linke Stehlampe
-    - linke Stehleuchte
-    - linke Standlampe
-    - linke Standleuchte
-    - Lampe links vom TV
-    - Lampe links neben dem TV
-    - Lampe links neben dem Fernseher
-    - left notification lamp
-    - left notification light
-    - lamp left to TV
-    - lamp left of TV
-    - light left to TV
-    - light left of TV
+#light.left_notification_light:
+#  friendly_name: Linke Lampe
 
+light.bathroom_ceiling_light:
+  friendly_name: Badezimmerlicht
+
+# light.testlight:
+#  friendly_name: Testlampe
+
+
+# -----------------------------------
+# Switches
+# -----------------------------------
 switch.floor_lamp:
   friendly_name: Lichtsäule
-  homebridge_name: Floor Lamp
-  google_assistant: true
-  google_assistant_name: links vom Sofa
-  google_assistant_type: light
   icon: mdi:lightbulb
-  aliases:
-    - links vom Sofa
-    - Lampe links vom Sofa
-    - links vom Sofa
-    - Stehlampe
-    - Stehleuchte
-    - Standlampe
-    - Standleuchte
-    - große Lampe
-    - große Leuchte
-    - floor lamp
-    - lamp next to couch
-    - light next to couch
-    - next to couch
 
 switch.tv:
-  friendly_name: TV
-  homebridge_name: TV
-  google_assistant: true
-  google_assistant_name: Fernseher
-  aliases:
-    - Fernseher
-    - Glotze
-    - Fernsehapparat
-    - Fernsehgerät
-    - Flimmerkiste 
-    - Röhre 
-    - TV-Gerät
+  friendly_name: Fernseher
+  icon: mdi:television
 
 switch.music:
-  friendly_name: Sonstiges
+  friendly_name: Musikanlage
+  icon: mdi:music
 
-group.notification_light_group:
-  friendly_name: notification light group
-  google_assistant: true
-  google_assistant_name: Benachrichtigungslampen
-  hidden: true
-  aliases:
-    - Ecklampen
-    - Benachrichtigungslampen
-    - Echleuchten
-    - Lampen neben dem Fernseher
-    - Leuchten neben dem Fernseher
-    - Lampen neben dem TV
-    - Leuchten neben dem TV
-    - notification lights
+switch.roboStation:
+  friendly_name: Roboter Station
+  icon: mdi:roomba
 
-#light.testlight:
-#  friendly_name: Testlampe
-#  google_assistant: true
-#  google_assistant_name: Testlampe
-#  aliases:
-#    - Testlampe
-#    - Leuchtstreifen
+switch.washer:
+  friendly_name: Waschmaschine
+  icon: mdi:washing-machine
 
-scene.movies:
-  friendly_name: Movies Night
-  google_assistant: true
-  google_assistant_name: Movies Night
-  aliases:
-    - Filmeabend
-
-climate.wohnzimmer_thermostat_1:
-  friendly_name: Heizung
-  google_assistant: true
-  google_assistant_name: Heizung
-  google_assistant_type: climate
-  aliases:
-    - Heizung
-
-vacuum.xiaomi_vacuum_cleaner:
-  friendly_name: Roboter
-  google_assistant: true
-  google_assistant_name: Roboter
-  google_assistant_type: switch
-  aliases:
-    - Roboter
 
 # -----------------------------------
 # Views
 # -----------------------------------
-group.room_view:
-  friendly_name: Räume
-  google_assistant: false
+group.groups_view:
+  icon: mdi:group
+
+group.default_view:
+  icon: mdi:home
+
+group.system_view:
+  icon: mdi:information-variant  
 
 # -----------------------------------
 # GROUPS
 # -----------------------------------
-group.all_vacuum_cleaners:
-  google_assistant: false
+# Rooms
+group.room_general:
+  friendly_name: Wohnung
+  icon: mdi:home
 
-group.calendar:
-  google_assistant: false
-
-group.calendar_group:
-  google_assistant: false
-
-group.weather_info_group:
-  friendly_name: Wetter Info
-  google_assistant: false
-
-group.rpi_info_group:
-  google_assistant: false
-
-group.climate_group:
-  google_assistant: false
-
-group.all_lights:
-  google_assistant: false
-
-group.light_group:
+group.room_light:
   friendly_name: Licht
-  google_assistant: false
+  icon: mdi:lightbulb
 
-group.all_switches:
-  google_assistant: false
-
-group.general_group:
-  friendly_name: Allgemein
-  google_assistant: false
-
-group.room_group:
-  friendly_name: Räume
-  google_assistant: false
-
-group.living_room:
+group.livingroom_general:
   friendly_name: Wohnzimmer
-  google_assistant: false
+  icon: mdi:sofa
 
-group.bed_room:
+group.livingroom_light:
+  friendly_name: Wohnzimmerlicht
+  icon: mdi:lightbulb
+
+group.bathroom_general:
+  friendly_name: Badezimmer
+  icon: mdi:human-male-female
+
+group.bathroom_light:
+  friendly_name: Badezimmerlicht
+  icon: mdi:lightbulb
+
+group.bedroom_general:
   friendly_name: Schlafzimmer
-  google_assistant: false
+  icon: mdi:hotel
 
-group.info_tv_power_group:
-  friendly_name: TV Verbrauch Info
+group.bedroom_light:
+  friendly_name: Schlafzimmerlicht
+  icon: mdi:lightbulb
 
-group.tv_group:
+group.washroom_general:
+  friendly_name: Waschraum
+  icon: mdi:washing-machine
+
+group.outside_general:
+  friendly_name: Draußen
+  icon: mdi:gate
+
+# Other
+group.weather_info:
+  friendly_name: Wetter Info
+  
+group.light:
+  friendly_name: Licht
+
+group.general:
+  friendly_name: Allgemein
+
+group.network_info:
+  friendly_name: Netzwerk
+
+group.notification_light:
+  friendly_name: notification light group
+# One Device Group
+group.tv:
   friendly_name: Fernseher
 
-group.network_info_group:
-  friendly_name: Netzwerk
+group.info_tv_power:
+  friendly_name: TV Verbrauch Info
+
+group.washer:
+  friendly_name: Waschmaschine
+  icon: mdi:washing-machine
+
+
+
 
 # -----------------------------------
 # Sensor
@@ -210,12 +132,15 @@ sensor.weather_symbol:
   friendly_name: Wetter
 sensor.weather_wind_speed:
   friendly_name: Windstärke
+  icon: mdi:weather-windy
 sensor.weather_temperature:
   friendly_name: Temperatur
 sensor.weather_precipitation:
   friendly_name: Niederschlag
+  icon: mdi:weather-pouring
 sensor.weather_humidity:
   friendly_name: Luftfeuchtigkeit
+  icon: mdi:water-percent
 
 sensor.diesel:
   icon: mdi:gas-station
@@ -224,9 +149,84 @@ sensor.fritz_netmonitor:
   friendly_name: FRITZ!Box
   icon: mdi:router-wireless
 
-sensor.TVEnergy:
-  friendly_name: Verbrauch
+binary_sensor.wohnzimmer_fensterkontakt_1:
+  friendly_name: Wohnzimmerfenster
+
+sensor.TVEnergyToday:
+  friendly_name: Verbrauch Heute
+  icon: mdi:gauge
+sensor.TVEnergyYesterday:
+  friendly_name: Verbrauch Gestern
+  icon: mdi:gauge
+sensor.TVEnergyTotal:
+  friendly_name: Gesamtverbrauch
+  icon: mdi:gauge
 sensor.TVPower:
   friendly_name: Leistung
+  icon: mdi:gauge
 sensor.TVVoltage:
-  fritz_netmonitor: Spannung
+  friendly_name: Spannung
+  icon: mdi:gauge
+
+sensor.washerEnergyToday:
+  friendly_name: Verbrauch Heute
+  icon: mdi:gauge
+sensor.washerEnergyYesterday:
+  friendly_name: Verbrauch Gestern
+  icon: mdi:gauge
+sensor.washerEnergyTotal:
+  friendly_name: Gesamtverbrauch
+  icon: mdi:gauge
+sensor.washerPower:
+  friendly_name: Leistung
+  icon: mdi:gauge
+sensor.washerVoltage:
+  friendly_name: Spannung
+  icon: mdi:gauge
+
+sensor.dryerEnergyToday:
+  friendly_name: Verbrauch Heute
+  icon: mdi:gauge
+sensor.dryerEnergyYesterday:
+  friendly_name: Verbrauch Gestern
+  icon: mdi:gauge
+sensor.dryerEnergyTotal:
+  friendly_name: Gesamtverbrauch
+  icon: mdi:gauge
+sensor.dryerPower:
+  friendly_name: Leistung
+  icon: mdi:gauge
+sensor.dryerVoltage:
+  friendly_name: Spannung
+  icon: mdi:gauge
+
+
+sensor.higrowTemperature:
+  friendly_name: Temperatur
+sensor.higrowSoil:
+  friendly_name: Wasserstand
+  icon: mdi:flower
+sensor.higrowHumidity:
+  fritz_netmonitor: Luftfeuchtigkeit
+  icon: mdi:water-percent
+  
+  
+# -----------------------------------
+# Scene
+# -----------------------------------
+scene.movies:
+  friendly_name: Movies Night
+
+
+# -----------------------------------
+# Climate
+# -----------------------------------
+climate.wohnzimmer_thermostat_1:
+  friendly_name: Heizung
+
+
+# -----------------------------------
+# Vacuum
+# -----------------------------------
+vacuum.xiaomi_vacuum_cleaner:
+  friendly_name: Roboter
