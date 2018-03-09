@@ -1,31 +1,190 @@
+#---Views--------------------------------------------------------------------------------------------------------------
+#----------------------------------------------------------------------------------------------------------------------
 default_view:
   view: yes
-  icon: mdi:home
   entities:
-    - group.light_group
-    - group.tv_and_entertainment_group
-    - group.general_group
+    - group.room_general
+    - group.livingroom_general
+    # - bedroom_general
+    - group.bathroom_general
+    - group.outside_general
+    - group.washroom_general
     - media_player.spotify
-    - switch.music
-    - group.weather_info_group
-    - scene.movies
 
-room_view:
+groups_view:
   view: yes
-  name: Rooms
   entities:
-    - group.living_room 
+    - group.lights
 
 system_view:
-#  name: System
   view: yes
-  icon: mdi:information-variant
   entities:
-    - group.rpi_info_group
-    - group.network_info_group
-    - group.info_tv_power_group
+    - group.higrow_info
+    - group.rpi_info
+    - group.network_info
+    - group.tv_info
+    - group.washer_info
 
-weather_info_group:
+
+#---Rooms--------------------------------------------------------------------------------------------------------------
+#----------------------------------------------------------------------------------------------------------------------
+room:
+  name: rooms
+  entities:
+    - group.room_general
+    - group.livingroom_general
+    # - bedroom_general
+    - group.bathroom_general
+    - group.outside_general
+    - group.washroom_general
+
+#---Gerneralroom-------------------------------------------------------------------------------------------------------
+room_general:
+  name: general room
+  entities:
+    - group.room_light
+    - climate.wohnzimmer_thermostat_1
+    - binary_sensor.wohnzimmer_fensterkontakt_1
+    - vacuum.xiaomi_vacuum_cleaner
+    - switch.roboStation
+
+room_light:
+  name: general light
+  entities:
+    - switch.floor_lamp
+
+#---Livingroom---------------------------------------------------------------------------------------------------------
+livingroom_general:
+  name: livingroom
+  entities:
+    - group.livingroom_light
+    - group.tv
+    - switch.music
+
+livingroom_light:
+  name: livingroom light
+  entities:
+    - light.right_notification_light
+    # - light.left_notification_light 
+
+#---Bathroom-----------------------------------------------------------------------------------------------------------
+bathroom_general:
+  name: bathroom
+  entities: 
+    - group.bathroom_light
+
+bathroom_light:
+  name: bathroom light
+  entities:
+    - light.bathroom_ceiling_light
+
+#---Bedroom------------------------------------------------------------------------------------------------------------
+bedroom_general:
+  name: bedroom
+  entities: 
+    - group.bathroom_light
+
+bedroom_light:
+  name: bedroom light
+  # entities:
+    # - light.testlight
+
+#---Washroom-----------------------------------------------------------------------------------------------------------
+washroom_general:
+  name: washroom
+  entities:
+    - group.washer
+    # - group.dryer
+
+#---Outside------------------------------------------------------------------------------------------------------------
+outside_general:
+  name: outside
+  entities:
+    - sun.sun
+    - sensor.weather_wind_speed
+    - sensor.weather_temperature
+    - sensor.weather_precipitation
+    - sensor.weather_humidity
+
+
+#---One Device---------------------------------------------------------------------------------------------------------
+#----------------------------------------------------------------------------------------------------------------------
+#---TV-----------------------------------------------------------------------------------------------------------------
+tv:
+  name: TV Group
+  icon: mdi:television
+  entities:
+    - switch.tv
+    - sensor.TVEnergyToday
+    - sensor.TVEnergyYesterday
+    - sensor.TVEnergyTotal
+    - sensor.TVPower
+    - sensor.TVVoltage
+
+tv_info:
+  name: TV Energy Info
+  entities:
+    - sensor.TVEnergyToday
+    - sensor.TVEnergyYesterday
+    - sensor.TVEnergyTotal
+    - sensor.TVPower
+    - sensor.TVVoltage
+
+#---Washer-------------------------------------------------------------------------------------------------------------
+washer:
+  name: Washer Group
+  icon: mdi:washing-machine
+  entities:
+    - switch.washer
+    - sensor.washerEnergyToday
+    - sensor.washerEnergyYesterday
+    - sensor.washerEnergyTotal
+    - sensor.washerPower
+    - sensor.washerVoltage
+
+washer_info:
+  name: Washer Energy Info
+  entities:
+    - sensor.washerEnergyToday
+    - sensor.washerEnergyYesterday
+    - sensor.washerEnergyTotal
+    - sensor.washerPower
+    - sensor.washerVoltage
+
+#---dryer--------------------------------------------------------------------------------------------------------------
+# dryer:
+#   name: Dryer Group
+#   icon: mdi:washing-machine
+#   entities:
+#     - switch.dryer
+#     - sensor.dryerEnergyToday
+#     - sensor.dryerEnergyYesterday
+#     - sensor.dryerEnergyTotal
+#     - sensor.dryerPower
+#     - sensor.dryerVoltage
+
+# dryer_info:
+#   name: Dryer Energy Info
+#   icon: mdi:washing-machine
+#   entities:
+#     - sensor.dryerEnergyToday
+#     - sensor.dryerEnergyYesterday
+#     - sensor.dryerEnergyTotal
+#     - sensor.dryerPower
+#     - sensor.dryerVoltage
+#---HiGrow-------------------------------------------------------------------------------------------------------------
+higrow_info:
+  name: Blumensensor
+  entities:
+    - sensor.higrowTemperature
+    - sensor.higrowSoil
+    - sensor.higrowHumidity
+
+
+#---Other--------------------------------------------------------------------------------------------------------------
+#----------------------------------------------------------------------------------------------------------------------
+
+weather_info:
   name: Weather Info
   entities:
     - sun.sun
@@ -35,12 +194,12 @@ weather_info_group:
     - sensor.weather_precipitation
     - sensor.weather_humidity
 
-network_info_group:
+network_info:
   name: network info
   entities:
   - sensor.fritz_netmonitor
 
-rpi_info_group:
+rpi_info:
   name: Raspberry Info
   entities:
     - sensor.cpu_speed
@@ -48,30 +207,34 @@ rpi_info_group:
     - sensor.disk_used_home
     - sensor.ram_available
 
-light_group:
+lights:
   name: Lights
-  control: hidden
   entities:
     - switch.floor_lamp
     - light.right_notification_light
-    - light.left_notification_light
+    - light.bathroom_ceiling_light
+    # - light.left_notification_light
     # - light.testlight
 
-tv_and_entertainment_group:
+tv_and_entertainment:
   name: TV
   entities:
-    - group.tv_group
+    - group.tv
     # - media_player.kodi
     - light.TVBacklight
 
-general_group:
+general:
   name: general
   entities:
+    - sensor.higrowTemperature
+    - sensor.higrowHumidity
     - vacuum.xiaomi_vacuum_cleaner
+    - switch.roboStation
     - climate.wohnzimmer_thermostat_1
     - binary_sensor.wohnzimmer_fensterkontakt_1
+    - group.washer
 
-calendar_group:
+calendar:
   name: Calendar
   entities:
     - calendar.ausbildung
@@ -80,38 +243,9 @@ calendar_group:
     - calendar.ferien
     - calendar.marvinkuenklergooglemailcom
 
-notification_light_group:
+notification_light:
   name: notification lights
   view: no
   entities:
     - light.right_notification_light
-    - light.left_notification_light
-
-room_group:
-  name: rooms
-  entities:
-    - group.living_room
-
-living_room:
-  name: living room
-  view: no
-  entities:
-    - light.right_notification_light
-    - light.left_notification_light 
-    - switch.floor_lamp
-
-info_tv_power_group:
-  name: TV Energy Info
-  entities:
-    - sensor.TVEnergy
-    - sensor.TVPower
-    - sensor.TVVoltage
-
-tv_group:
-  name: TV Group
-  icon: mdi:television
-  entities:
-    - switch.tv
-    - sensor.TVEnergy
-    - sensor.TVPower
-    - sensor.TVVoltage
+    # - light.left_notification_light
