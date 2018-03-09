@@ -1,0 +1,15 @@
+- alias: "Notify when the washer finished"
+  trigger:
+    - platform: template
+      value_template: "{% if states('sensor.washerpower') == '3' -%}true{%endif%}"
+  action:
+    - service: light.turn_on
+      data:
+        entity_id: light.right_notification_light
+        brightness: 255
+        effect: WhatsApp
+    - service: light.turn_on
+      data:
+        entity_id: light.left_notification_light
+        brightness: 255
+        effect: WhatsApp
