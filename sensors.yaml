@@ -1,32 +1,21 @@
-- platform: yr
-  name: Weather
-  monitored_conditions:
-    - temperature
-    - symbol
-    - precipitation
-    - windSpeed
-    - humidity
+#---Electric Meter-----------------------------------------------------------------------------------------------------
+#----------------------------------------------------------------------------------------------------------------------
 
-- platform: template
-  sensors:
-    current_time:
-      friendly_name: 'Time'
-      value_template: '{{now().strftime("%H:%M")}}'
-
-- platform: systemmonitor
-  resources:
-    - type: disk_use_percent
-      arg: /home
-    - type: memory_free
-    - type: processor_use
-
-- platform: fritzbox_netmonitor
-  host: 192.168.178.1
-  
+#---Television---------------------------------------------------------------------------------------------------------
 - platform: mqtt
-  name: "TVEnergy"
+  name: "TVEnergyToday"
   state_topic: "tele/sonoff_tv/SENSOR"
   value_template: "{{ value_json.ENERGY.Today }}"
+  unit_of_measurement: "kWh"
+- platform: mqtt
+  name: "TVEnergyYesterday"
+  state_topic: "tele/sonoff_tv/SENSOR"
+  value_template: "{{ value_json.ENERGY.Yesterday }}"
+  unit_of_measurement: "kWh"
+- platform: mqtt
+  name: "TVEnergyTotal"
+  state_topic: "tele/sonoff_tv/SENSOR"
+  value_template: "{{ value_json.ENERGY.Total }}"
   unit_of_measurement: "kWh"
 - platform: mqtt
   name: "TVPower"
@@ -38,3 +27,101 @@
   state_topic: "tele/sonoff_tv/SENSOR"
   value_template: "{{ value_json.ENERGY.Voltage }}"
   unit_of_measurement: "V"
+
+#---Washer-------------------------------------------------------------------------------------------------------------
+- platform: mqtt
+  name: "washerEnergyToday"
+  state_topic: "tele/sonoff_washer/SENSOR"
+  value_template: "{{ value_json.ENERGY.Today }}"
+  unit_of_measurement: "kWh"
+- platform: mqtt
+  name: "washerEnergyYesterday"
+  state_topic: "tele/sonoff_washer/SENSOR"
+  value_template: "{{ value_json.ENERGY.Yesterday }}"
+  unit_of_measurement: "kWh"
+- platform: mqtt
+  name: "washerEnergyTotal"
+  state_topic: "tele/sonoff_washer/SENSOR"
+  value_template: "{{ value_json.ENERGY.Total }}"
+  unit_of_measurement: "kWh"
+- platform: mqtt
+  name: "washerPower"
+  state_topic: "tele/sonoff_washer/SENSOR"
+  value_template: "{{ value_json.ENERGY.Power }}"
+  unit_of_measurement: "W"
+- platform: mqtt
+  name: "washerVoltage"
+  state_topic: "tele/sonoff_washer/SENSOR"
+  value_template: "{{ value_json.ENERGY.Voltage }}"
+  unit_of_measurement: "V"
+
+#---Dryer--------------------------------------------------------------------------------------------------------------
+- platform: mqtt
+  name: "dryerEnergyToday"
+  state_topic: "tele/sonoff_dryer/SENSOR"
+  value_template: "{{ value_json.ENERGY.Today }}"
+  unit_of_measurement: "kWh"
+- platform: mqtt
+  name: "dryerEnergyYesterday"
+  state_topic: "tele/sonoff_dryer/SENSOR"
+  value_template: "{{ value_json.ENERGY.Yesterday }}"
+  unit_of_measurement: "kWh"
+- platform: mqtt
+  name: "dryerEnergyTotal"
+  state_topic: "tele/sonoff_dryer/SENSOR"
+  value_template: "{{ value_json.ENERGY.Total }}"
+  unit_of_measurement: "kWh"
+- platform: mqtt
+  name: "dryerPower"
+  state_topic: "tele/sonoff_dryer/SENSOR"
+  value_template: "{{ value_json.ENERGY.Power }}"
+  unit_of_measurement: "W"
+- platform: mqtt
+  name: "dryerVoltage"
+  state_topic: "tele/sonoff_dryer/SENSOR"
+  value_template: "{{ value_json.ENERGY.Voltage }}"
+  unit_of_measurement: "V"
+
+
+
+#---Other--------------------------------------------------------------------------------------------------------------
+#----------------------------------------------------------------------------------------------------------------------
+
+#---Weather------------------------------------------------------------------------------------------------------------
+- platform: yr
+  name: Weather
+  monitored_conditions:
+    - temperature
+    - symbol
+    - precipitation
+    - windSpeed
+    - humidity
+
+#---System-------------------------------------------------------------------------------------------------------------
+- platform: systemmonitor
+  resources:
+    - type: disk_use_percent
+      arg: /home
+    - type: memory_free
+    - type: processor_use
+
+#---Device Trackers----------------------------------------------------------------------------------------------------
+- platform: fritzbox_netmonitor
+  host: 192.168.178.1
+
+#---HiGrow Plantmeter--------------------------------------------------------------------------------------------------
+- platform: mqtt
+  name: "higrowTemperature"
+  state_topic: "tele/HiGrow1/SENSOR"
+  value_template: "{{ value_json.temperature }}"
+  unit_of_measurement: "°C"
+- platform: mqtt
+  name: "higrowSoil"
+  state_topic: "tele/HiGrow1/SENSOR"
+  value_template: "{{ value_json.water }}"
+  unit_of_measurement: ""
+- platform: mqtt
+  name: "higrowHumidity"
+  state_topic: "tele/HiGrow1/SENSOR"
+  value_template: "{{ value_json.humidity }}"
+  unit_of_measurement: "%"
