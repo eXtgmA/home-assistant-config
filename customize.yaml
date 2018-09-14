@@ -37,6 +37,10 @@ switch.washer:
   friendly_name: Waschmaschine
   icon: mdi:washing-machine
 
+switch.dryer:
+  friendly_name: Wäschetrockner
+  icon: mdi:washing-machine
+
 
 # -----------------------------------
 # Views
@@ -120,6 +124,10 @@ group.washer:
   friendly_name: Waschmaschine
   icon: mdi:washing-machine
 
+group.dryer:
+  friendly_name: Wäschetrockner
+  icon: mdi:washing-machine
+
 
 
 
@@ -152,65 +160,69 @@ sensor.fritz_netmonitor:
 binary_sensor.wohnzimmer_fensterkontakt_1:
   friendly_name: Wohnzimmerfenster
 
-sensor.TVEnergyToday:
+sensor.tv_energy_today:
   friendly_name: Verbrauch Heute
   icon: mdi:gauge
-sensor.TVEnergyYesterday:
+sensor.tv_energy_yesterday:
   friendly_name: Verbrauch Gestern
   icon: mdi:gauge
-sensor.TVEnergyTotal:
+sensor.tv_energy_total:
   friendly_name: Gesamtverbrauch
   icon: mdi:gauge
-sensor.TVPower:
+sensor.tv_power:
   friendly_name: Leistung
   icon: mdi:gauge
-sensor.TVVoltage:
+sensor.tv_voltage:
   friendly_name: Spannung
   icon: mdi:gauge
 
-sensor.washerEnergyToday:
+sensor.washer_energy_today:
   friendly_name: Verbrauch Heute
   icon: mdi:gauge
-sensor.washerEnergyYesterday:
+sensor.washer_energy_yesterday:
   friendly_name: Verbrauch Gestern
   icon: mdi:gauge
-sensor.washerEnergyTotal:
+sensor.washer_energy_total:
   friendly_name: Gesamtverbrauch
   icon: mdi:gauge
-sensor.washerPower:
+sensor.washer_power:
   friendly_name: Leistung
   icon: mdi:gauge
-sensor.washerVoltage:
+sensor.washer_voltage:
   friendly_name: Spannung
   icon: mdi:gauge
 
-sensor.dryerEnergyToday:
+sensor.dryer_energy_today:
   friendly_name: Verbrauch Heute
   icon: mdi:gauge
-sensor.dryerEnergyYesterday:
+sensor.dryer_energy_yesterday:
   friendly_name: Verbrauch Gestern
   icon: mdi:gauge
-sensor.dryerEnergyTotal:
+sensor.dryer_energy_total:
   friendly_name: Gesamtverbrauch
   icon: mdi:gauge
-sensor.dryerPower:
+sensor.dryer_power:
   friendly_name: Leistung
   icon: mdi:gauge
-sensor.dryerVoltage:
+sensor.dryer_voltage:
   friendly_name: Spannung
   icon: mdi:gauge
 
 
-sensor.higrowTemperature:
+sensor.higrow_temperature:
   friendly_name: Temperatur
 sensor.higrowSoil:
   friendly_name: Wasserstand
   icon: mdi:flower
-sensor.higrowHumidity:
-  fritz_netmonitor: Luftfeuchtigkeit
+sensor.higrow_humidity:
+  friendly_name: Luftfeuchtigkeit
   icon: mdi:water-percent
   
-  
+
+binary_sensor.door_window_sensor_158d0001f39476:
+  friendly_name: Terrassentür
+  device_class: door
+
 # -----------------------------------
 # Scene
 # -----------------------------------
@@ -223,6 +235,14 @@ scene.movies:
 # -----------------------------------
 climate.wohnzimmer_thermostat_1:
   friendly_name: Heizung
+  current_temperature_template: "{{ states.sensor.livingroomTemperature.state }}"
+
+sensor.livingroom_temperature:
+  friendly_name: Temperatur
+
+sensor.livingroom_humidity:
+  friendly_name: Luftfeuchtigkeit
+  icon: mdi:water-percent
 
 
 # -----------------------------------
@@ -230,3 +250,10 @@ climate.wohnzimmer_thermostat_1:
 # -----------------------------------
 vacuum.xiaomi_vacuum_cleaner:
   friendly_name: Roboter
+
+
+# -----------------------------------
+# Weather
+# -----------------------------------
+weather.yweather:
+  friendly_name: Wetter

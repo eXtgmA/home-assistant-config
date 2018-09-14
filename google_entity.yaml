@@ -3,7 +3,7 @@
 switch.floor_lamp:
   name: Lichtsäule
   expose: true
-  type: light
+  # type: light
   aliases:
     - links vom Sofa
     - Lampe links vom Sofa
@@ -22,7 +22,7 @@ switch.floor_lamp:
 light.right_notification_light:
   name: Rechte Lampe
   expose: true
-  type: light
+#  type: light
   aliases:
     - in der rechten Ecke
     - rechte Benachrichtigungslampe
@@ -49,7 +49,7 @@ light.right_notification_light:
 light.left_notification_light:
   name: linke Lampe
   expose: true
-  type: light
+#  type: light
   aliases:
     - in der linken Ecke
     - linke Benachrichtigungslampe
@@ -74,7 +74,7 @@ light.left_notification_light:
 switch.tv:
   name: TV
   expose: true
-  type: switch 
+#  type: switch 
   aliases:
     - Fernseher
     - Glotze
@@ -89,7 +89,7 @@ switch.tv:
 switch.music:
   name: Musikanlage
   expose: true
-  type: switch
+#  type: switch
   aliases:
     - Musikanlage
     - Radio
@@ -98,14 +98,14 @@ switch.music:
 climate.wohnzimmer_thermostat_1:
   name: Heizung
   expose: true
-  type: climate
+#  type: climate
   aliases:
     - Heizung
 
 switch.roboStation:
   name: Roboterladestation
   expose: true
-  type: switch 
+#  type: switch 
   aliases:
     - Roboterladestation
     - Staubsaugerbasis
@@ -115,7 +115,7 @@ switch.roboStation:
 vacuum.xiaomi_vacuum_cleaner:
   name: Roboter
   expose: true
-  type: switch
+#  type: switch
   aliases:
     - Roboter
     - Staubsauger

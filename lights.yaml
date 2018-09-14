@@ -6,17 +6,3 @@
     192.168.178.30:
       name: right notification light
       save_on_change: true
-
-# 192.168.178.58:
-#   name: right_notification_light
-#   save_on_change: true
-# 192.168.178.45:
-#   name: other_light
-# - platform: hyperion
-#   name: TVBacklight
-#   host: 192.168.178.36
-#   default_color: [102, 255, 255]
-# - platform: hyperion
-#   name: TestLight
-#   host: 192.168.178.220
-#   default_color: [0, 255, 0]

@@ -1,0 +1,141 @@
+title: Home Assistant
+
+views:
+  - icon: mdi:home-assistant
+    title: Main
+    id: home
+    cards:
+      - type: picture-glance
+        title: Allgemein
+        navigation_path: generalroom
+        image: https://www.home-assistant.io/images/default-social.png
+        entities:
+          - switch.floor_lamp
+          - vacuum.xiaomi_vacuum_cleaner
+      - type: picture-glance
+        title: Wohnzimmer
+        navigation_path: livingroom
+        entities:
+          - light.right_notification_light
+          - switch.tv
+        image: /local/living_room.png
+      - type: picture-glance
+        title: Badezimmer
+        navigation_path: bathroom
+        entities:
+          - light.bathroom_ceiling_light
+        image: /local/bathroom.png
+      - type: weather-forecast
+        entity: weather.yweather
+  - title: Allgemeines
+    id: generalroom
+    background: center / cover no-repeat url("https://www.home-assistant.io/images/default-social.png") fixed
+    cards:
+      - type: entities
+        entities:
+          - switch.floor_lamp
+          - switch.robo_station
+          - vacuum.xiaomi_vacuum_cleaner
+      - type: entity-filter
+        entities:
+          - binary_sensor.wohnzimmer_fensterkontakt_1
+          - binary_sensor.door_window_sensor_158d0001f39476
+        state_filter:
+          - on
+          - off
+        card: 
+          type: glance
+          title: Offene Türen
+      - type: picture
+        image: /local/return.png
+        navigation_path: home
+  - title: Wohnzimmer
+    id: livingroom
+    background: center / cover no-repeat url("/local/living_room.png") fixed
+    cards:
+      - type: glance
+        entities:
+          - sensor.livingroom_temperature
+          - sensor.livingroom_humidity
+      - type: entities
+        title: Licht
+        show_header_toggle: true
+        entities:
+          - light.right_notification_light
+          - switch.floor_lamp
+          - light.gateway_light_7811dce18889
+      - type: media-control
+        entity: media_player.wohnzimmer
+      - type: picture
+        image: /local/return.png
+        navigation_path: home
+  - title: Badezimmer
+    id: bathroom
+    background: center / cover no-repeat url("/local/bathroom.png") fixed
+    cards:
+      - type: entities
+        title: Licht
+        show_header_toggle: true
+        entities:
+          - light.bathroom_ceiling_light
+      - type: picture
+        image: /local/return.png
+        navigation_path: home
+  - title: Waschraum
+    id: washroom
+    background: center / cover no-repeat url("/local/washroom.png") fixed
+    cards:
+      - type: entities
+        title: Waschmaschine
+        entities:
+          - switch.washer
+          - sensor.washer_energy_today
+          - sensor.washer_energy_yesterday
+          - sensor.washer_energy_total
+          - sensor.washer_power
+          - sensor.washer_voltage
+      - type: entities
+        title: Wäschetrockner
+        entities:
+          - switch.dryer
+          - sensor.dryer_energy_today
+          - sensor.dryer_energy_yesterday
+          - sensor.dryer_energy_total
+          - sensor.dryer_power
+          - sensor.dryer_voltage
+      - type: picture
+        image: /local/return.png
+        navigation_path: home
+
+  - title: floorplan
+    id: floorplan
+    panel: true
+    cards:
+      - type: picture-elements
+        image: /local/floorplan.png
+        elements:
+          - type: state-icon
+            tap_action: toggle
+            entity: light.ceiling_lights
+            style:
+              top: 47%
+              left: 42%
+          - type: state-icon
+            tap_action: toggle
+            entity: light.kitchen_lights
+            style:
+              top: 30%
+              left: 15%
+          - type: state-label
+            entity: sensor.outside_temperature
+            style:
+              top: 82%
+              left: 79%
+          - type: service-button
+            title: Turn lights off
+            style:
+              top: 95%
+              left: 60%
+            service: light.turn_off
+            service_data:
+                entity_id: group.all_lights

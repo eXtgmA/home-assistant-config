@@ -3,84 +3,102 @@
 
 #---Television---------------------------------------------------------------------------------------------------------
 - platform: mqtt
-  name: "TVEnergyToday"
+  name: tv energy today
   state_topic: "tele/sonoff_tv/SENSOR"
   value_template: "{{ value_json.ENERGY.Today }}"
   unit_of_measurement: "kWh"
 - platform: mqtt
-  name: "TVEnergyYesterday"
+  name: tv energy yesterday
   state_topic: "tele/sonoff_tv/SENSOR"
   value_template: "{{ value_json.ENERGY.Yesterday }}"
   unit_of_measurement: "kWh"
 - platform: mqtt
-  name: "TVEnergyTotal"
+  name: tv energy total
   state_topic: "tele/sonoff_tv/SENSOR"
   value_template: "{{ value_json.ENERGY.Total }}"
   unit_of_measurement: "kWh"
 - platform: mqtt
-  name: "TVPower"
+  name: tv power
   state_topic: "tele/sonoff_tv/SENSOR"
   value_template: "{{ value_json.ENERGY.Power }}"
   unit_of_measurement: "W"
 - platform: mqtt
-  name: "TVVoltage"
+  name: tv voltage
   state_topic: "tele/sonoff_tv/SENSOR"
   value_template: "{{ value_json.ENERGY.Voltage }}"
   unit_of_measurement: "V"
 
 #---Washer-------------------------------------------------------------------------------------------------------------
 - platform: mqtt
-  name: "washerEnergyToday"
+  name: washer energy today
   state_topic: "tele/sonoff_washer/SENSOR"
   value_template: "{{ value_json.ENERGY.Today }}"
   unit_of_measurement: "kWh"
 - platform: mqtt
-  name: "washerEnergyYesterday"
+  name: washer energy yesterday
   state_topic: "tele/sonoff_washer/SENSOR"
   value_template: "{{ value_json.ENERGY.Yesterday }}"
   unit_of_measurement: "kWh"
 - platform: mqtt
-  name: "washerEnergyTotal"
+  name: washer energy total
   state_topic: "tele/sonoff_washer/SENSOR"
   value_template: "{{ value_json.ENERGY.Total }}"
   unit_of_measurement: "kWh"
 - platform: mqtt
-  name: "washerPower"
+  name: washer power
   state_topic: "tele/sonoff_washer/SENSOR"
   value_template: "{{ value_json.ENERGY.Power }}"
   unit_of_measurement: "W"
 - platform: mqtt
-  name: "washerVoltage"
+  name: washer voltage
   state_topic: "tele/sonoff_washer/SENSOR"
   value_template: "{{ value_json.ENERGY.Voltage }}"
   unit_of_measurement: "V"
 
 #---Dryer--------------------------------------------------------------------------------------------------------------
 - platform: mqtt
-  name: "dryerEnergyToday"
+  name: dryer energy today
   state_topic: "tele/sonoff_dryer/SENSOR"
   value_template: "{{ value_json.ENERGY.Today }}"
   unit_of_measurement: "kWh"
 - platform: mqtt
-  name: "dryerEnergyYesterday"
+  name: dryer energy yesterday
   state_topic: "tele/sonoff_dryer/SENSOR"
   value_template: "{{ value_json.ENERGY.Yesterday }}"
   unit_of_measurement: "kWh"
 - platform: mqtt
-  name: "dryerEnergyTotal"
+  name: dryer energy total
   state_topic: "tele/sonoff_dryer/SENSOR"
   value_template: "{{ value_json.ENERGY.Total }}"
   unit_of_measurement: "kWh"
 - platform: mqtt
-  name: "dryerPower"
+  name: dryer power
   state_topic: "tele/sonoff_dryer/SENSOR"
   value_template: "{{ value_json.ENERGY.Power }}"
   unit_of_measurement: "W"
 - platform: mqtt
-  name: "dryerVoltage"
+  name: dryer voltage
   state_topic: "tele/sonoff_dryer/SENSOR"
   value_template: "{{ value_json.ENERGY.Voltage }}"
   unit_of_measurement: "V"
+
+
+
+#---Climate------------------------------------------------------------------------------------------------------------
+#----------------------------------------------------------------------------------------------------------------------
+
+
+#---Livingroom---------------------------------------------------------------------------------------------------------
+- platform: mqtt
+  name: livingroom temperature
+  state_topic: "tele/sonoff_lightmiddle/SENSOR"
+  value_template: "{{ value_json.AM2301.Temperature }}"
+  unit_of_measurement: "°C"
+- platform: mqtt
+  name: livingroom humidity
+  state_topic: "tele/sonoff_lightmiddle/SENSOR"
+  value_template: "{{ value_json.AM2301.Humidity }}"
+  unit_of_measurement: "%"
 
 
 
@@ -89,7 +107,7 @@
 
 #---Weather------------------------------------------------------------------------------------------------------------
 - platform: yr
-  name: Weather
+  name: weather
   monitored_conditions:
     - temperature
     - symbol
@@ -111,17 +129,17 @@
 
 #---HiGrow Plantmeter--------------------------------------------------------------------------------------------------
 - platform: mqtt
-  name: "higrowTemperature"
+  name: higrow temperature
   state_topic: "tele/HiGrow1/SENSOR"
   value_template: "{{ value_json.temperature }}"
   unit_of_measurement: "°C"
 - platform: mqtt
-  name: "higrowSoil"
+  name: higrow soil
   state_topic: "tele/HiGrow1/SENSOR"
   value_template: "{{ value_json.water }}"
   unit_of_measurement: ""
 - platform: mqtt
-  name: "higrowHumidity"
+  name: higrow humidity
   state_topic: "tele/HiGrow1/SENSOR"
   value_template: "{{ value_json.humidity }}"
   unit_of_measurement: "%"

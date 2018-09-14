@@ -18,6 +18,13 @@ homeassistant:
 #----------------------------------------------------------------------------------------------------------------------
 # Enables the frontend
 frontend:
+  themes:
+    dark-mode:
+      primary-color: black
+    happy:
+      primary-color: pink
+    sad:
+      primary-color: blue
 
 # Enables configuration UI
 config:
@@ -84,17 +91,26 @@ media_player:
   - platform: spotify
     client_id: !secret spotify_client_id
     client_secret: !secret spotify_client_secret
+  - platform: cast
+    host: 192.168.178.47
   # - platform: kodi
   #   host: 192.168.178.36
 
 #Thermostat
 maxcube:
-   host: 192.168.178.38
+  gateways:
+    - host: 192.168.178.38
 
 device_tracker:
   - platform: fritz
     host: 192.168.178.1
 
+
+#Xiaomi Aqara
+xiaomi_aqara:
+  discovery_retry: 5
+  gateways:
+    - key: !secret xiaomi_aqara_key
 
 #---Other--------------------------------------------------------------------------------------------------------------
 # Track the sun
@@ -125,9 +141,19 @@ google_assistant:
   agent_user_id: !secret google_agent_user_id
   api_key: [an API Key generated for the Google Actions project]
   expose_by_default: false
+  exposed_domains:
+    - switch
+    - light
+    - climate
   entity_config: !include google_entity.yaml
 
 # Google Calendar
 #google:
 #  client_id: !secret google_client_id
 #  client_secret: !secret google_client_secret
+
+weather:
+  - platform: yweather
+
+openuv:
+  api_key: !secret openuv_api_key

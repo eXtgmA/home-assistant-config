@@ -6,14 +6,14 @@
   payload_off: "OFF"
 
 - platform: mqtt
-  name: TV
+  name: tv
   command_topic: "cmnd/sonoff_tv/power"
   state_topic: "stat/sonoff_tv/POWER"
   payload_on: "ON"
   payload_off: "OFF"
 
 - platform: mqtt
-  name: roboStation
+  name: robo station
   command_topic: "cmnd/sonoff_robotStation/power"
   state_topic: "stat/sonoff_robotStation/POWER"
   payload_on: "ON"
@@ -30,6 +30,13 @@
   name: washer
   command_topic: "cmnd/sonoff_washer/power"
   state_topic: "stat/sonoff_washer/POWER"
+  payload_on: "ON"
+  payload_off: "OFF"
+
+- platform: mqtt
+  name: dryer
+  command_topic: "cmnd/sonoff_dryer/power"
+  state_topic: "stat/sonoff_dryer/POWER"
   payload_on: "ON"
   payload_off: "OFF"
 

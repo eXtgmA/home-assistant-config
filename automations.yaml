@@ -1,15 +1,94 @@
-- alias: "Notify when the washer finished"
+- alias: Notify when the washer finished
   trigger:
-    - platform: template
-      value_template: "{% if states('sensor.washerpower') == '3' -%}true{%endif%}"
+  - platform: template
+    value_template: '{% if states(''sensor.washerpower'') == ''3'' -%}true{%endif%}'
   action:
-    - service: light.turn_on
-      data:
-        entity_id: light.right_notification_light
-        brightness: 255
-        effect: WhatsApp
-    - service: light.turn_on
-      data:
-        entity_id: light.left_notification_light
-        brightness: 255
-        effect: WhatsApp
+  - service: light.turn_on
+    data:
+      entity_id: light.right_notification_light
+      brightness: 255
+      effect: WhatsApp
+  - service: light.turn_on
+    data:
+      entity_id: light.left_notification_light
+      brightness: 255
+      effect: WhatsApp
+  id: 03d218ea839a4d6f8adf1942072db7e0
+- alias: Notify when the dryer finished
+  trigger:
+  - platform: template
+    value_template: '{% if states(''sensor.dryerpower'') == ''3'' -%}true{%endif%}'
+  action:
+  - service: light.turn_on
+    data:
+      entity_id: light.right_notification_light
+      brightness: 255
+      effect: Twitter
+  - service: light.turn_on
+    data:
+      entity_id: light.left_notification_light
+      brightness: 255
+      effect: Twitter
+  id: 437077c1dd9441fb8486235425dde55a
+- alias: Badezimmer Musik - an
+  trigger:
+    platform: state
+    entity_id: binary_sensor.motion_sensor_158d0001e54426
+    from: 'off'
+    to: 'on'
+  condition:
+    condition: numeric_state
+    entity_id: sensor.motion_sensor_158d0001e54426
+    above: 40
+  action:
+  - service: media_player.media_play
+    entity_id: media_player.badezimmer
+  id: f7ad2559a6144e3680493d8120b13a80
+- alias: Badezimmer Musik - aus
+  trigger:
+  - platform: state
+    entity_id: binary_sensor.motion_sensor_158d0001e54426
+    from: 'on'
+    to: 'off'
+    for:
+      seconds: 0.1
+  - platform: numeric_state
+    entity_id: sensor.illumination_158d0001e54426
+    below: 40
+  action:
+  - service: media_player.media_pause
+    entity_id: media_player.badezimmer
+  id: 0293aa59c11c4b2ba5d419357df6c66e
+- alias: Xiaomi Aqara Switch - einfacher Klick - Musik Start / Stop
+  trigger:
+    platform: event
+    event_type: click
+    event_data:
+      entity_id: binary_sensor.switch_158d00022423e9
+      click_type: single
+  action:
+    service: media_player.media_play_pause
+    entity_id: media_player.wohnzimmer
+  id: dc40fb2d07db4025a13f98be81d1d304
+- alias: Xiaomi Aqara Switch - doppel Klick - Musik next
+  trigger:
+    platform: event
+    event_type: click
+    event_data:
+      entity_id: binary_sensor.switch_158d00022423e9
+      click_type: double
+  action:
+    service: media_player.media_next_track
+    entity_id: media_player.spotify
+  id: a1a6d0a2e29c4e72a4965ee8501dec28
+- alias: Xiaomi Aqara Switch - langer Klick - Licht TV
+  trigger:
+    platform: event
+    event_type: click
+    event_data:
+      entity_id: binary_sensor.switch_158d00022423e9
+      click_type: long_click_press
+  action:
+    service: light.toggle
+    entity_id: light.right_notification_light
+  id: 9bf5556c6aa54cfcb23787727c1d5bd9

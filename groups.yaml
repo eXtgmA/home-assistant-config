@@ -24,6 +24,7 @@ system_view:
     - group.network_info
     - group.tv_info
     - group.washer_info
+    - group.dryer_info
 
 
 #---Rooms--------------------------------------------------------------------------------------------------------------
@@ -44,7 +45,10 @@ room_general:
   entities:
     - group.room_light
     - climate.wohnzimmer_thermostat_1
+    - sensor.livingroomTemperature
+    - sensor.livingroomHumidity
     - binary_sensor.wohnzimmer_fensterkontakt_1
+    - binary_sensor.door_window_sensor_158d0001f39476
     - vacuum.xiaomi_vacuum_cleaner
     - switch.roboStation
 
@@ -94,7 +98,7 @@ washroom_general:
   name: washroom
   entities:
     - group.washer
-    # - group.dryer
+    - group.dryer
 
 #---Outside------------------------------------------------------------------------------------------------------------
 outside_general:
@@ -152,26 +156,26 @@ washer_info:
     - sensor.washerVoltage
 
 #---dryer--------------------------------------------------------------------------------------------------------------
-# dryer:
-#   name: Dryer Group
-#   icon: mdi:washing-machine
-#   entities:
-#     - switch.dryer
-#     - sensor.dryerEnergyToday
-#     - sensor.dryerEnergyYesterday
-#     - sensor.dryerEnergyTotal
-#     - sensor.dryerPower
-#     - sensor.dryerVoltage
+dryer:
+  name: Dryer Group
+  icon: mdi:washing-machine
+  entities:
+    - switch.dryer
+    - sensor.dryerEnergyToday
+    - sensor.dryerEnergyYesterday
+    - sensor.dryerEnergyTotal
+    - sensor.dryerPower
+    - sensor.dryerVoltage
 
-# dryer_info:
-#   name: Dryer Energy Info
-#   icon: mdi:washing-machine
-#   entities:
-#     - sensor.dryerEnergyToday
-#     - sensor.dryerEnergyYesterday
-#     - sensor.dryerEnergyTotal
-#     - sensor.dryerPower
-#     - sensor.dryerVoltage
+dryer_info:
+  name: Dryer Energy Info
+  icon: mdi:washing-machine
+  entities:
+    - sensor.dryerEnergyToday
+    - sensor.dryerEnergyYesterday
+    - sensor.dryerEnergyTotal
+    - sensor.dryerPower
+    - sensor.dryerVoltage
 #---HiGrow-------------------------------------------------------------------------------------------------------------
 higrow_info:
   name: Blumensensor
@@ -249,3 +253,14 @@ notification_light:
   entities:
     - light.right_notification_light
     # - light.left_notification_light
+
+
+
+
+
+
+
+
+
+
+
