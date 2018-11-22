@@ -8,11 +8,17 @@
       entity_id: light.right_notification_light
       brightness: 255
       effect: WhatsApp
-  - service: light.turn_on
+  - service: notify.livingroom_tv
     data:
-      entity_id: light.left_notification_light
-      brightness: 255
-      effect: WhatsApp
+      message: "Waschmaschine fertig"
+      data:
+        icon: "www/washer.png"
+
+  # - service: light.turn_on
+  #   data:
+  #     entity_id: light.left_notification_light
+  #     brightness: 255
+  #     effect: WhatsApp
   id: 03d218ea839a4d6f8adf1942072db7e0
 - alias: Notify when the dryer finished
   trigger:
@@ -59,7 +65,8 @@
   - service: media_player.media_pause
     entity_id: media_player.badezimmer
   id: 0293aa59c11c4b2ba5d419357df6c66e
-- alias: Xiaomi Aqara Switch - einfacher Klick - Musik Start / Stop
+# Sofa Button
+- alias: Xiaomi Aqara Switch - Sofa - einfacher Klick - Musik Start / Stop
   trigger:
     platform: event
     event_type: click
@@ -70,7 +77,7 @@
     service: media_player.media_play_pause
     entity_id: media_player.wohnzimmer
   id: dc40fb2d07db4025a13f98be81d1d304
-- alias: Xiaomi Aqara Switch - doppel Klick - Musik next
+- alias: Xiaomi Aqara Switch - Sofa - doppel Klick - Musik next
   trigger:
     platform: event
     event_type: click
@@ -81,7 +88,7 @@
     service: media_player.media_next_track
     entity_id: media_player.spotify
   id: a1a6d0a2e29c4e72a4965ee8501dec28
-- alias: Xiaomi Aqara Switch - langer Klick - Licht TV
+- alias: Xiaomi Aqara Switch - Sofa - langer Klick - Licht TV
   trigger:
     platform: event
     event_type: click
@@ -90,5 +97,100 @@
       click_type: long_click_press
   action:
     service: light.toggle
-    entity_id: light.right_notification_light
+    entity_id: light.notification_tv_light
   id: 9bf5556c6aa54cfcb23787727c1d5bd9
+
+# Bett Button
+- alias: Xiaomi Aqara Switch - Bett - einfacher Klick - Musik Start / Stop
+  trigger:
+    platform: event
+    event_type: click
+    event_data:
+      entity_id: binary_sensor.switch_158d0002287e2b
+      click_type: single
+  action:
+    service: media_player.media_play_pause
+    entity_id: media_player.wohnzimmer
+- alias: Xiaomi Aqara Switch - Bett - doppel Klick - Musik next
+  trigger:
+    platform: event
+    event_type: click
+    event_data:
+      entity_id: binary_sensor.switch_158d0002287e2b
+      click_type: double
+  action:
+    service: media_player.media_next_track
+    entity_id: media_player.spotify
+- alias: Xiaomi Aqara Switch - Bett - langer Klick - Licht Sofa
+  trigger:
+    platform: event
+    event_type: click
+    event_data:
+      entity_id: binary_sensor.switch_158d0002287e2b
+      click_type: long_click_press
+  action:
+    service: switch.toggle
+    entity_id: switch.floor_lamp
+
+# Fensterkontakt
+- alias: Terassentür öffnen
+  trigger:
+    platform: state
+    entity_id: binary_sensor.door_window_sensor_158d0001f39476
+    from: 'off'
+    to: 'on'
+  action:
+    - service: input_number.set_value
+      data_template:
+        entity_id: input_number.temperature_livingroom
+        value: "{{ state_attr('climate.wohnzimmer_thermostat_1', 'temperature') }}"
+    - service: climate.set_temperature
+      data:
+        entity_id: climate.wohnzimmer_thermostat_1
+        temperature: "12"
+
+- alias: Terassentür schließen
+  trigger:
+    platform: state
+    entity_id: binary_sensor.door_window_sensor_158d0001f39476
+    from: 'on'
+    to: 'off'
+  action:
+    service: climate.set_temperature
+    data_template:
+      entity_id: climate.wohnzimmer_thermostat_1
+      temperature: "{{ states.input_number.temperature_livingroom.state | float }}"
+
+
+- alias: Xbox Festplatte einschalten
+  trigger:
+    platform: template
+    # value_template: "{% if not is_state('media_player.lg_fernseher', 'off') and is_state_attr('media_player.lg_fernseher', 'source', 'HDMI-1')%}true{% endif %}"
+    value_template: "{% if is_state('media_player.living_room_xbox_one', 'on') %}true{% endif %}"
+  action:
+    - service: switch.turn_on
+      entity_id: switch.tv
+    - service: media_player.turn_on
+      entity_id: media_player.lg_fernseher
+
+- alias: Xbox Festplatte ausschalten
+  trigger:
+    platform: template
+    # value_template: "{% if is_state('media_player.lg_fernseher', 'off') and is_state('media_player.living_room_xbox_one', 'off') %}true{% endif %}"
+    value_template: "{% if is_state('media_player.living_room_xbox_one', 'off') %}true{% endif %}"
+  action:
+    - service: switch.turn_off
+      entity_id: switch.tv
+    - service: media_player.turn_off
+      entity_id: media_player.lg_fernseher
+
+- alias: Xbox Einschalten bei HDMI-1
+  trigger:
+    platform: template
+    value_template: "{% if is_state_attr('media_player.lg_fernseher', 'source', 'MICROSOFT') %}true{% endif %}"
+  action:
+    service: media_player.turn_on
+    entity_id: media_player.living_room_xbox_one
+    
+    # platform: state
+    # entity_id: media_player.lg_fernseher
