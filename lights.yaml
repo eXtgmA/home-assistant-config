@@ -1,8 +1,25 @@
 - platform: yeelight
   devices:
-    192.168.178.21:
+    192.168.178.211:
       name: bathroom ceiling light
       save_on_change: true
-    192.168.178.30:
+    # 192.168.178.210:
+    #   name: right notification light
+    #   save_on_change: true
+    192.168.178.213:
+      name: left notification light
+      save_on_change: true
+    192.168.178.214:
       name: right notification light
       save_on_change: true
+- platform: xiaomi_miio
+  name: Xiaomi Philips Smart LED Ball
+  host: 192.168.178.215
+  token: !secret xiaomi_philips_smart_led_ball_key
+  model: philips.light.bulb
+
+- platform: group
+  name: notification tv light
+  entities:
+    - light.right_notification_light
+    - light.left_notification_light
