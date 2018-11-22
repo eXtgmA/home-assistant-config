@@ -1,86 +1,195 @@
+resources:
+  - url: /local/mini-media-player-bundle.js?v=0.9.4
+    type: module
+
 title: Home Assistant
 
 views:
   - icon: mdi:home-assistant
     title: Main
     id: home
-    cards:
-      - type: picture-glance
-        title: Allgemein
-        navigation_path: generalroom
-        image: https://www.home-assistant.io/images/default-social.png
-        entities:
-          - switch.floor_lamp
-          - vacuum.xiaomi_vacuum_cleaner
-      - type: picture-glance
-        title: Wohnzimmer
-        navigation_path: livingroom
-        entities:
-          - light.right_notification_light
-          - switch.tv
-        image: /local/living_room.png
-      - type: picture-glance
-        title: Badezimmer
-        navigation_path: bathroom
-        entities:
-          - light.bathroom_ceiling_light
-        image: /local/bathroom.png
-      - type: weather-forecast
-        entity: weather.yweather
-  - title: Allgemeines
-    id: generalroom
     background: center / cover no-repeat url("https://www.home-assistant.io/images/default-social.png") fixed
     cards:
-      - type: entities
-        entities:
-          - switch.floor_lamp
-          - switch.robo_station
-          - vacuum.xiaomi_vacuum_cleaner
-      - type: entity-filter
-        entities:
-          - binary_sensor.wohnzimmer_fensterkontakt_1
-          - binary_sensor.door_window_sensor_158d0001f39476
-        state_filter:
-          - on
-          - off
-        card: 
-          type: glance
-          title: Offene Türen
-      - type: picture
-        image: /local/return.png
-        navigation_path: home
-  - title: Wohnzimmer
-    id: livingroom
-    background: center / cover no-repeat url("/local/living_room.png") fixed
-    cards:
-      - type: glance
-        entities:
-          - sensor.livingroom_temperature
-          - sensor.livingroom_humidity
-      - type: entities
-        title: Licht
-        show_header_toggle: true
-        entities:
-          - light.right_notification_light
-          - switch.floor_lamp
-          - light.gateway_light_7811dce18889
+      - type: horizontal-stack
+        cards: 
+          - type: glance
+            entities:
+              - sensor.livingroom_temperature
+              - sensor.livingroom_humidity
+            
+          - type: thermostat
+            entity: climate.wohnzimmer_thermostat_1
+      - type: vertical-stack
+        cards:
+          - type: horizontal-stack
+            cards:
+              - type: light
+                entity: light.notification_tv_light
+                name: Fernseher
+              - type: light
+                entity: light.gateway_light_7811dce18889
+                name: Gateway
+          - type: horizontal-stack
+            cards:
+              - type: entity-button
+                entity: switch.floor_lamp
+                tap_action: toggle
+                hold_action: more-info
+      - type: custom:mini-media-player
+        entity: media_player.lg_fernseher
+        name: Fernseher
+        volume_stateless: true
+        artwork: none
+        hide_volume: false
+        hide_controls: true
+        power_color: true
+        show_progress: true
       - type: media-control
         entity: media_player.wohnzimmer
-      - type: picture
-        image: /local/return.png
-        navigation_path: home
-  - title: Badezimmer
-    id: bathroom
-    background: center / cover no-repeat url("/local/bathroom.png") fixed
+      
+      - type: conditional
+        conditions:
+          - entity: binary_sensor.wohnzimmer_fensterkontakt_1
+            state: "on"
+          - entity: binary_sensor.door_window_sensor_158d0001f39476
+            state: "on"
+        card:
+          - type: conditional
+            conditions:
+              - entity: binary_sensor.wohnzimmer_fensterkontakt_1
+                state: "on"
+            card:
+              - type: entity
+                entities:
+                  - binary_sensor.wohnzimmer_fensterkontakt_1
+          - type: conditional
+            conditions:
+              - entity: binary_sensor.door_window_sensor_158d0001f39476
+                state: "on"
+            card:
+              - type: entity
+                entities:
+                  - binary_sensor.door_window_sensor_158d0001f39476
+      # - type: glance
+      #   title: Offene Türen
+      #   type: entities
+      #   entities:
+      #     - type: entity-filter
+      #       entities:
+      #         - binary_sensor.wohnzimmer_fensterkontakt_1
+      #         - binary_sensor.door_window_sensor_158d0001f39476
+      #       state_filter:
+      #         - on
+      #         # - off
+      #       card: 
+      #         type: glance
+      #         title: Offene Türen
+      - type: weather-forecast
+        entity: weather.yweather
+
+
+      # - type: picture-glance
+      #   title: Allgemein
+      #   navigation_path: generalroom
+      #   image: https://www.home-assistant.io/images/default-social.png
+      #   entities:
+      #     - switch.floor_lamp
+      #     - vacuum.xiaomi_vacuum_cleaner
+      # - type: picture-glance
+      #   title: Wohnzimmer
+      #   navigation_path: livingroom
+      #   entities:
+      #     - light.right_notification_light
+      #     - switch.tv
+      #   image: /local/living_room.png
+      # - type: picture-glance
+      #   title: Badezimmer
+      #   navigation_path: bathroom
+      #   entities:
+      #     - light.bathroom_ceiling_light
+      #   image: /local/bathroom.png
+  - title: Sonstiges
+    id: others
     cards:
       - type: entities
-        title: Licht
-        show_header_toggle: true
+        title: Schalter
         entities:
-          - light.bathroom_ceiling_light
-      - type: picture
-        image: /local/return.png
-        navigation_path: home
+          - entity: switch.tv
+            name: Xbox Festplatte
+          - entity: switch.dryer
+            name: Wäschetrockner
+          - entity: switch.washer
+            name: Waschmaschine
+      - type: entities
+        title: Licht
+        entities:
+          - entity: light.bathroom_ceiling_light
+            name: Badezimmerlicht
+          - entity: light.gateway_light_7811dce18889
+            name: Gateway Licht
+          - entity: light.left_notification_light
+            name: Linke Lampe
+          - entity: light.right_notification_light
+            name: Rechte Lampe
+          - entity: light.xiaomi_philips_smart_led_ball
+            name: Philips Leuchte
+          - entity: switch.floor_lamp
+            name: Sofalampe
+
+  # - title: Allgemeines
+  #   id: generalroom
+  #   background: center / cover no-repeat url("/local/hassio.png") fixed
+  #   cards:
+  #     - type: entities
+  #       entities:
+  #         - switch.floor_lamp
+  #         - switch.robo_station
+  #         - vacuum.xiaomi_vacuum_cleaner
+  #     - type: entity-filter
+  #       entities:
+  #         - binary_sensor.wohnzimmer_fensterkontakt_1
+  #         - binary_sensor.door_window_sensor_158d0001f39476
+  #       state_filter:
+  #         - on
+  #         - off
+  #       card: 
+  #         type: glance
+  #         title: Offene Türen
+  #     - type: picture
+  #       image: /local/return.png
+  #       navigation_path: home
+  # - title: Wohnzimmer
+  #   id: livingroom
+  #   background: center / cover no-repeat url("/local/living_room.png") fixed
+  #   cards:
+  #     - type: glance
+  #       entities:
+  #         - sensor.livingroom_temperature
+  #         - sensor.livingroom_humidity
+  #     - type: entities
+  #       title: Licht
+  #       show_header_toggle: true
+  #       entities:
+  #         - light.right_notification_light
+  #         - switch.floor_lamp
+  #         - light.gateway_light_7811dce18889
+  #     - type: media-control
+  #       entity: media_player.wohnzimmer
+  #     - type: picture
+  #       image: /local/return.png
+  #       navigation_path: home
+  # - title: Badezimmer
+  #   id: bathroom
+  #   background: center / cover no-repeat url("/local/bathroom.png") fixed
+  #   cards:
+  #     - type: entities
+  #       title: Licht
+  #       show_header_toggle: true
+  #       entities:
+  #         - light.bathroom_ceiling_light
+  #     - type: picture
+  #       image: /local/return.png
+  #       navigation_path: home
   - title: Waschraum
     id: washroom
     background: center / cover no-repeat url("/local/washroom.png") fixed
